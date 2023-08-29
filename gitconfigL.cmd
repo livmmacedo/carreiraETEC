@@ -1,2 +1,2 @@
-git config --global user.name "LeandroRodriguesL"
-git config --global user.email "leandro.lopes31@etec.sp.gov.br"
+git config --global user.name "livmmacedo"
+git config --global user.email "livia.medeiros2@etec.sp.gov.br"
