@@ -1,6 +1,6 @@
 <header>
 <nav>
-    <img src="logo.png" class="logo">
+    <img src="static/imagens/logo.png" class="logo">
     <div id="titulo">CarreiraETEC </div>
 </nav>
 </header>
