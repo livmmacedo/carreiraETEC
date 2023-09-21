@@ -8,7 +8,7 @@ $controlador = new EmpresaController();
 
 //obtem a lista de empresas do banco de dados.
 $lista = $controlador->listar();
-*/
+
 ?>
 <nav class="navbar sticky-top bg-body-tertiary">
   <div class="container-fluid">
@@ -28,7 +28,9 @@ $lista = $controlador->listar();
     </thead>
     <tbody>
       <?php
-      foreach ($lista as $empresa) {
+      
+      foreach($lista as $empresa) {
+      
         ?>
         <tr>
           <td><a href="#"><?= $empresa->getNome() ?></a></td>
@@ -44,7 +46,7 @@ $lista = $controlador->listar();
   </table>
 
   <div id="div-add">
-    <i class="fa fa-plus-square" aria-hidden="true"></i>
+   <a href="empresa/novo"> <i class="fa fa-plus-square" aria-hidden="true"></i>
   </div>
 </div>
 
