@@ -11,7 +11,7 @@ class Router extends RouterSwitch
         $route = str_replace("carreiraETEC/", "", $route);
 
         error_log("Rota requisitada: $route",0);
-        $parts = explode($route,"/"); //querando requisição
+        $parts = explode("/",$route); //querando requisição
         error_log("Partes da requisição: ".print_r($parts,true),0);
 
         $page = $parts[0];
