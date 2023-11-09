@@ -17,7 +17,7 @@
 
         <div class="mb-3 input-group">
         <span class="input-group-text">Cidade</span>
-        <select class="form-select" aria-label="Default select example" id="cidade">
+        <select class="form-select" aria-label="Default select example" id="cidade" name="cidade">
             <option selected>Selecione uma cidade</option>
         </select>
         </div>            
@@ -27,7 +27,7 @@
         <div class="mb-3 input-group">
             
             <!--Incluir os inputs que serão utilizados para enviar a geolocalização  -->        
-            <input type="hidden" id="geolocalizacao" name="geolocalizacao" onchange="carregarCidadesIBGE()">
+            <input type="hidden" id="geolocalizacao" name="geolocalizacao">
 
             <span class="input-group-text">Endereço</span>
             <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço da empresa">
@@ -72,9 +72,9 @@
      carregarEstadosIBGE();
 
 
-     function carregarCidadesIBGE(estado){
+     function carregarCidadesIBGE(){
         var selectEstado = document.getElementById("estados");
-        var estado =selectEstado.value;
+        var estado = selectEstado.value;
         let url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+estado+'/municipios';
         fetch(url)
             .then(response => response.json())
@@ -82,24 +82,20 @@
                     if (data!=null && data.length>0) {
                         var selectCidade = document.getElementById("cidade");
 
+                        
                         selectCidade.innerHTML = "";
-
+                        
                         data.forEach(element => {
                             let option = document.createElement('option');
                             option.value= element['id'];
                             option.innerText = element['nome'];
                             selectCidade.appendChild(option);
-
+                            
                         });
-
-
                     }
             }).catch(error => {
                     console.log("Erro carregando cidades "+error);
-                });;
-     } 
-
-
-     carregarCidadesIBGE();
-     
+            });;
+        
+     }
 </script>    
