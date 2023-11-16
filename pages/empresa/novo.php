@@ -12,35 +12,35 @@
        
        
        <!--01- TELEFONE DA EMPRESA -->
-       <div class="mb-3 input-group has-validation "> <!--04 incluir a classe de campo com validação has-validation-->
-         <span class="input-group-text">Telefone</span>
-         <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
-         <!--03 informe uma mensagem de validação do campo telefone -->
-         <div class="invalid-feedback">
-          Por favor digite um telefone
-         </div>
+       <div class="mb-3 input-group has-validation"> <!--04 incluir a classe de campo com validação has-validation-->
+          <span class="input-group-text">Telefone</span>
+          <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="Digite o telefone">
+          <!--03 informe uma mensagem de validação do campo telefone -->
+          <div class="invalid-feedback">
+            Por favor digite um telefone
+          </div>
          <!--03 FIM informe uma mensagem de validação do campo telefone-->
        </div>
        <!--01-Fim TELEFONE da empresa-->
  
         <div class="mb-3 input-group">
-        <span class="input-group-text">Estado</span>
-        <select class="form-select" aria-label="Default select example" id="estados" onchange="carregarCidadesIBGE()">
-            <option selected>Selecione um estado</option>
-        </select>
-        <div class="invalid-feedback">
-          Por favor digite um Estado
-         </div>
+          <span class="input-group-text">Estado</span>
+          <select class="form-select" aria-label="Default select example" id="estados" onchange="carregarCidadesIBGE()">
+             <option selected>Selecione um estado</option>
+          </select>
+          <div class="invalid-feedback">
+            Por favor digite um Estado
+           </div>
         </div>            
  
         <div class="mb-3 input-group">
-        <span class="input-group-text">Cidade</span>
-        <select class="form-select" aria-label="Default select example" id="cidade" name="cidade">
+          <span class="input-group-text">Cidade</span>
+          <select class="form-select" aria-label="Default select example" id="cidade" name="cidade">
             <option selected>Selecione antes um estado</option>
-        </select>
-        <div class="invalid-feedback">
-          Por favor selecione uma cidade
-         </div>
+          </select>
+          <div class="invalid-feedback">
+             Por favor selecione uma cidade
+          </div>
         </div>            
  
  
@@ -70,17 +70,19 @@
             .then(response => response.json())
             .then(data => {
                     if (data!=null && data.length>0) {
+                        let ordenado = data.sort ((a,b)=>{return a.nome.localeCompare(b.nome)});
  
                        
                         var selectEstado = document.getElementById("estados");
-                        data.forEach(element => {
+                        ordenado.forEach(element => {
                            
+
                             let option = document.createElement('option');
                             option.value= element['sigla'];
                             option.innerText = element['nome'];
                             selectEstado.appendChild(option);
  
-                        });
+                     });
  
  
                     }
@@ -131,7 +133,7 @@
         }
  
         let etelefone =document.getElementById("telefone");
-        if (etelefone.value==null || etelefone.value.length >=9) {
+        if (etelefone.value==null || etelefone.value.length <9) {
             passou = false;
             etelefone.classList.add("is-invalid");
         } else {
@@ -139,7 +141,7 @@
         }
        
         let ecidade =document.getElementById("cidade");
-        if (ecidade.value==null || ecidade.value.length >=9) {
+        if (ecidade.value==null || ecidade.value=="") {
             passou = false;
             ecidade.classList.add("is-invalid");
         } else {
@@ -149,7 +151,19 @@
         if (!passou) {
              e.preventDefault();
         }
-     }
-     document.getElementById("formulario").addEventListener('subimt',validacao);
-</script>    
+       
+        let egeo =document.getElementById("geolocalizacao");
+        let eend =document.getElemtnById("endereco");
+        if (egeo.value==null || egeo.value.length <=3) {
+            passou = false;
+            eend.classList.add("is-invalid");
+        } else {
+            eend.classList.remove("is-invalid");
+        }
  
+        if (!passou) {
+            e.preventDefault();
+        }
+     }
+     document.getElementById("formulario").addEventListener('submit',validacao);
+</script>    
